@@ -1,5 +1,11 @@
+
+
 $(document).ready(function(){
   Inputmask({
-    "mask" : "99/99/9999"
-  }).mask("#basico");
+    mask: '+(57) 9{3} 9{3} 9{4}',
+  }).mask("#numeroCelular");
+
+  Inputmask({
+    mask: 'A{3} 9{3}'
+  }).mask('#placaCarro');
 });
