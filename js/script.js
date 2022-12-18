@@ -1,3 +1,5 @@
 $(document).ready(function(){
-  console.log('Entramos al js');
+  Inputmask({
+    "mask" : "99/99/9999"
+  }).mask("#basico");
 });
