@@ -10,7 +10,34 @@
 <body class="bg-dark text-white">
   <h1 class="text-center">Uso de la <a href="https://github.com/RobinHerbots/Inputmask" target="_blank">Libreria inputmask</a></h1>
 
-  <div class="container mt-10">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <label for="basicoPruebas" class="form-label">Ejemplo Basico para Pruebas: </label>
+        <!-- Ejemplo Basico para Pruebas -->
+        <div class="input-group">
+          <input type="text" class="form-control" id="basicoPruebas" autocomplete="off">
+        <!-- </div>
+        <div class="text-light">
+          Mascara: <pre class="d-inline">"+(57) 9{3} 9{3} 9{4}"</pre>
+        </div>
+        <div class="mt-3">
+          <p>Codigo js: </p>
+          <code>
+            <pre class="fs-6">
+            Inputmask({
+              mask: '+(57) 9{3} 9{3} 9{4}',
+            }).mask("#idInput");
+            </pre>
+          </code>
+        </div> -->
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6">
@@ -37,7 +64,7 @@
     </div>
   </div>
 
-  <div class="container mt-10">
+  <div class="container mt-5">
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6">
@@ -55,7 +82,82 @@
             <pre class="fs-6">
               Inputmask({
                 mask: 'A{3} 9{3}'
-              }).mask('#placaCarro');
+              }).mask('#idInput');
+            </pre>
+          </code>
+        </div>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <label for="emailDinamico" class="form-label">Ejemplo email con mascara dinamica: </label>
+        <!-- Ejemplo Placa Carro -->
+        <div class="input-group">
+          <input type="text" class="form-control" id="emailDinamico" autocomplete="off">
+        </div>
+        <div class="text-light">
+          Mascara: <pre class="d-inline">"*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]"</pre>
+        </div>
+        <div class="mt-3">
+          <p>Codigo js: </p>
+          <code>
+            <pre class="fs-6">
+              Inputmask({
+                mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+                greedy: false,
+                onBeforePaste: function (pastedValue, opts) {
+                  pastedValue = pastedValue.toLowerCase();
+                  return pastedValue.replace("mailto:", "");
+                },
+                definitions: {
+                  '*': {
+                    validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+                    casing: "lower"
+                  }
+                }
+              }).mask('#idInput');
+            </pre>
+          </code>
+        </div>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <label for="decimalDinamica" class="form-label">Ejemplo numero decimal con mascara dinamica: </label>
+        <!-- Ejemplo Placa Carro -->
+        <div class="input-group">
+          <input type="text" class="form-control" id="decimalDinamica" autocomplete="off">
+        </div>
+        <div class="text-light">
+          Mascara: <pre class="d-inline">"$ (.999){+|1},00"</pre>
+        </div>
+        <div class="mt-3">
+          <p>Codigo js: </p>
+          <code>
+            <pre class="fs-6">
+              Inputmask({
+                mask:"$ (.999){+|1},00",
+                positionCaretOnClick: "radixFocus",
+                radixPoint: ",",
+                _radixDance: true,
+                numericInput: true,
+                placeholder: "0",
+                definitions: {
+                    "0": {
+                        validator: "[0-9\uFF11-\uFF19]"
+                    }
+                }
+              }).mask('#decimalDinamica');
             </pre>
           </code>
         </div>
