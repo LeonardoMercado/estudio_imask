@@ -53,14 +53,14 @@ $(document).ready(function(){
   }).mask("#alternadorEjemplo");
 
   Inputmask({
-    alias: 'numeric',
-    autoGroup: true, 
-    groupSeparator: "\\.",   
-    digits: 2,
-    digitsOptional: false,
+    alias: 'currency',
     prefix: '$ ',
-    placeholder: '0',
+    groupSeparator: '.',
+    radixPoint: ',',
+    digits: 2,
+    autoGroup: true
   }).mask("#dinero");
+
 
 
 
