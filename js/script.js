@@ -1,17 +1,7 @@
 $(document).ready(function(){
 
   Inputmask({
-    mask:"$ (,999){+|1}.00",
-    positionCaretOnClick: "radixFocus",
-    radixPoint: ".",
-    _radixDance: true,
-    numericInput: true,
-    placeholder: "0",
-    definitions: {
-        "0": {
-            validator: "[0-9]"
-        }
-    }
+    mask:"999",
   }).mask("#basicoPruebas");
 
   Inputmask({
@@ -50,6 +40,27 @@ $(document).ready(function(){
         }
     }
   }).mask('#decimalDinamica');
+
+  Inputmask({
+    mask:"(99.9)|(X)",
+    keepStatic: false,
+    definitions: {
+      "X": {
+        validator: "[xX]",
+        casing: "upper"
+      }
+    }
+  }).mask("#alternadorEjemplo");
+
+  Inputmask({
+    alias: 'numeric',
+    autoGroup: true, 
+    groupSeparator: "\\.",   
+    digits: 2,
+    digitsOptional: false,
+    prefix: '$ ',
+    placeholder: '0',
+  }).mask("#dinero");
 
 
 

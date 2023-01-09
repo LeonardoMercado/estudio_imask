@@ -123,12 +123,47 @@ Se debera ingresar dos caracteres alfabeticos seguidos de un guion y entre 1 has
 
 Otra forma de ver esta mascara es: ```aa-9[9][9][9]```, este es el equivalente de esta mascara dinamica en mascara opcional.
 
+#### Máscaras de alternador:
+
+La sintaxis del alternador es como una declaración OR. La máscara puede ser una de las opciones especificadas en el alternador.
+
+Para definir un alternador use el ```|```. Por ejemplo: 
+- ```"a|9"``` => a o 9 
+- ```"(aaa)|(999)"``` => aaa o 999 
+- ```"(aaa|999|9AA)"``` => aaa o 999 o 9AA
+- ```"aaaa|9999"``` => aaa a o 9 999
+
+Ejemplo:
+~~~
+Inputmask({
+    mask:"(99.9)|(X)",
+    definitions: {
+      "X": {
+        validator: "[xX]",
+        casing: "upper"
+      }
+    }
+  }).mask("#alternadorEjemplo");
+~~~
+
+Se debe ingresar dos numeros seguidos de un punto y otro numero, **o** ingresar una X. La definicion dentro de la declaracion, valida que si se ingresa una x o X se tome como entrada y se convierte a MAYUSCULAS.
+
+Otra forma de declara esta mascara es:
+~~~
+Inputmask({
+    mask: ["99.9", "X"],
+    definitions: {
+      "X": {
+        validator: "[xX]",
+        casing: "upper"
+      }
+    }
+  }).mask("#basicoPruebas");
+~~~
 
 
 
-#### Adicionales para las mascaras con opcionales: 
-- ```clearMaskOnLostFocus: true```: Evita que la parte opcional de la mascara se muestre en el placeholder. Una vez se llena algun valor opcional se muestra la mascara entera.
-- ```greedy: false```: igual que clearMaskOnLostFocus.
+
 
 # Conclusiones:
 
