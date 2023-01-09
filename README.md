@@ -7,13 +7,18 @@ Repositorio creado para el estudio y consulta de la [libreria inputmask](https:/
 > NOTA: Para este proyecto es necesario tener instalado [node.js](https://nodejs.org/es/) en su equipo local, se recomienda la version 14 o superior.
 
 1. Clonar este repositorio en su equipo local:
-     - ```git clone https://github.com/LeonardoMercado/estudio_inputmask.git```
+    ~~~
+    git clone https://github.com/LeonardoMercado/estudio_inputmask.git
+    ~~~
 2. Digirirse a la carpeta ```estudio_inputmask``` y descargar las dependencias necesarias para el proyecto con los comandos:
-      - ~~~ 
-        $ cd estudio_inputmask
-        $ npm install
-        ~~~
-3. Correr el proyecto con el comando: ```npx http-server```
+    ~~~ 
+    cd estudio_inputmask
+    npm install
+    ~~~
+3. Correr el proyecto con el comando: 
+   ~~~
+   npx http-server
+   ~~~
 4. Abrir en su explorador preferido la direccion: [localhost:8080](http://127.0.0.1:8080)
 
 # Notas
