@@ -1,8 +1,17 @@
 $(document).ready(function(){
 
   Inputmask({
-    clearMaskOnLostFocus: true,
-    mask: '9[-9999]',
+    mask:"$ (,999){+|1}.00",
+    positionCaretOnClick: "radixFocus",
+    radixPoint: ".",
+    _radixDance: true,
+    numericInput: true,
+    placeholder: "0",
+    definitions: {
+        "0": {
+            validator: "[0-9]"
+        }
+    }
   }).mask("#basicoPruebas");
 
   Inputmask({

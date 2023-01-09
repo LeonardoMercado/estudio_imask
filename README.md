@@ -2,7 +2,7 @@
 
 Repositorio creado para el estudio y consulta de la [libreria inputmask](https://github.com/RobinHerbots/Inputmask#via-inputmask-class)
 
-# Instalación
+# Instalación:
 
 > NOTA: Para este proyecto es necesario tener instalado [node.js](https://nodejs.org/es/) en su equipo local, se recomienda la version 14 o superior.
 
@@ -21,7 +21,7 @@ Repositorio creado para el estudio y consulta de la [libreria inputmask](https:/
    ~~~
 4. Abrir en su explorador preferido la direccion: [localhost:8080](http://127.0.0.1:8080)
 
-# Notas
+# Notas:
 
 
 #### Definiciones de enmascaramiento predeterminadas:
@@ -30,16 +30,114 @@ Use algunas de estas definiciones para elaborar la mascara deseada:
 - ```a``` : Para cualquier valor alfabético.
 - ```*``` : Para cualquier valor alfanumerico.
 
-Por ejemplo, para declarar una mascara que solo admita dos valores alfabeticos, seguido por un guion y 4 numeros use: ```aa-9999```.
-Si declara la mascara de la siguiente manera: ```AA-9999```, el formato del valor alfabetico se pondra en mayusculas automaticamente. Esta mascara se puede resumir en: ```A{1,2}-9{4}``` y tendra el mismo comportamiento. La parte ```A{1,2}``` indica que se admite entre 1 a 2 valores alfabeticos, y ```9{4}``` indica que se admite 4 numeros.
-
-Tambien es posible declarar valores como opcionales, para esto utilize ```[]```, por ejemplo: la mascara ```a[a]-9999``` solo admitira uno o dos valores alfabeticos, seguido por un guion y 4 numeros, es decir, el segundo caracter al inicio tiene que ser alfabetico pero es opcional.
-
 Nota: Si necesita usar alguno de estos caracteres como valor estatico dentro de su mascara, escapelo con ```\\```.
+
+#### Tipos de Enmascaramiento:
+##### Mascaras Estaticas:
+La máscara está definida y no cambiará durante la entrada. Por ejemplo:
+~~~
+$(document).ready(function(){
+  $(selector).inputmask("aa-9999");
+  $(selector).inputmask({mask: "aa-9999"});
+});
+~~~
+La mascara ```aa-9999``` declara que solo admita dos valores alfabeticos, seguido por un guion y 4 numeros. Si declara la mascara de la siguiente manera: ```AA-9999```, el formato del valor alfabetico se pondra en mayusculas automaticamente. 
+
+##### Mascaras Opcionales:
+Es posible definir algunas partes en la máscara como opcionales. Esto se hace usando ```[ ]```.
+
+~~~
+$('#test').inputmask('(99) 9999[9]-9999');
+~~~
+
+Esta máscara permitirá entradas como (99) 12345-9999 o (99) 1234-9999. Note que el segundo conjunto de numeros pueden ser entre 4 y 5 numeros.
+
+otros ejemplos:
+- Input => 12123451234 con mascara => (12) 12345-1234 (completo)
+- Input => 121234-1234 con mascara => (12) 1234-1234 (completo)
+- Input => 1212341234 con mascara => (12) 12341-234_ (incompleto)
+
+###### Mascaras Opcionales, opcion greedy:
+
+Al definir una máscara opcional junto con la opción ```greedy: false```, la máscara de entrada mostrará primero la máscara más pequeña posible como entrada.
+
+Por ejemplo, La mascara definica de la siguiente manera:
+~~~
+Inputmask({
+    mask: "9[-9999]", 
+    greedy: false,
+  }).mask("#basicoPruebas");
+~~~
+
+mostrará:
+![input sin greedy](https://i.imgur.com/OZ6d9Ra.png)
+
+Pero al definir la opcion de ```greedy: true``` 
+~~~
+Inputmask({
+    mask: "9[-9999]", 
+    greedy: true,
+  }).mask("#basicoPruebas");
+~~~
+
+mostrará:
+![input sin greedy](https://i.imgur.com/Od86niN.png)
+
+Por defecto la opcion de ```greedy``` esta en false.
+
+#### Máscaras dinámicas:
+
+Las máscaras dinámicas pueden cambiar durante la entrada. Para definir una parte dinámica use ```{ }```.
+
+{n} => n repeticiones {n|j} => n repeticiones, con j jitmasking {n,m} => de n a m repeticiones {n,m|j} => de n a m repeticiones, con j jitmasking
+
+También se permiten {+} y {*}. + empezar desde 1 y * empezar desde 0.
+
+Por ejemplo, la mascara definida como:
+~~~
+Inputmask({
+    mask: "aa-9{4}",
+  }).mask("#basicoPruebas");
+~~~
+
+Se debera ingresar dos caracteres alfabeticos seguidos de un guion y 4 numeros.
+
+- Input => ab3232 con mascara => ab-3232 (completo)
+- Input => cd-1234 con mascara => cd-1234 (completo)
+- Input => ef234 con mascara => ef-234_ (incompleto)
+
+Otra forma de ver esta mascara es: ```aa-9999```, este es el equivalente de esta mascara dinamica en mascara estatica.
+
+Otro ejemplo:
+~~~
+Inputmask({
+    mask: "aa-9{1,4}",
+  }).mask("#basicoPruebas");
+~~~
+
+Se debera ingresar dos caracteres alfabeticos seguidos de un guion y entre 1 hasta 4 numeros.
+
+- Input => ab3232 con mascara => ab-3232 (completo)
+- Input => cd-12 con mascara => cd-12 (completo)
+- Input => ef con mascara => ef-_ (incompleto)
+
+Otra forma de ver esta mascara es: ```aa-9[9][9][9]```, este es el equivalente de esta mascara dinamica en mascara opcional.
+
+
+
 
 #### Adicionales para las mascaras con opcionales: 
 - ```clearMaskOnLostFocus: true```: Evita que la parte opcional de la mascara se muestre en el placeholder. Una vez se llena algun valor opcional se muestra la mascara entera.
 - ```greedy: false```: igual que clearMaskOnLostFocus.
+
+# Conclusiones:
+
+Existen tres caracteres especiales para definir las mascaras, los cuales son:
+- ```9```:Permite ingresar cualquier valor numerico.
+- ```a``` | ```A```:Permite ingresar cualquier valor alfabetico. | permite ingresar cualquier valor alfabetico y lo convierte a MAYUSCULAs.
+- ```*```:Permite ingresar cualquier valor alfanumerico.
+
+Si se necesitan estos caracteres para una mascara en particular, se deben escapar con ```\\```
 
 # Autor
 [**Ing. Leonardo Fabio Mercado Benítez**](https://www.linkedin.com/in/leonardofabiomercadobenitez/)
