@@ -6,7 +6,7 @@ const PAIS = 'CO';
 $(document).ready(function(){
 
   Inputmask({
-    alias: 'currency',
+    alias: 'email',
   }).mask("#basicoPruebas");
 
   Inputmask({
@@ -70,7 +70,6 @@ $(document).ready(function(){
     mask: function () { 
       let mascara = '';
       let paisActual = $('#mascaraFuncion').attr('data');
-      console.log(paisActual);
       if(PAIS === paisActual){
         mascara = `AAA-9{${MAX_VALUE_CO}}`;
       } else {

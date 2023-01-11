@@ -89,7 +89,7 @@ Por defecto la opcion de ```greedy``` esta en false.
 
 Las máscaras dinámicas pueden cambiar durante la entrada. Para definir una parte dinámica use ```{ }```.
 
-{n} => n repeticiones {n|j} => n repeticiones, con j jitmasking {n,m} => de n a m repeticiones {n,m|j} => de n a m repeticiones, con j jitmasking
+{n} => n repeticiones {n|j} => n repeticiones, con j [jitmasking](#jitMasking) {n,m} => de n a m repeticiones {n,m|j} => de n a m repeticiones, con j [jitmasking](#jitMasking)
 
 También se permiten {+} y {*}. + empezar desde 1 y * empezar desde 0.
 
@@ -191,6 +191,7 @@ Si la data del input ```mascaraFuncion``` es CO se mostrará:
 Caso contrario mostrará:
 ![mascaraCO](https://i.imgur.com/K692HTb.png)
 
+<a name="jitMasking"></a>
 #### Enmascaramiento JIT:
 
 Enmascaramiento justo a tiempo (JIT => Just In Time). Con la opción ```jitMasking```, puede habilitar el enmascaramiento jit. La máscara solo será visible para los caracteres ingresados por el usuario. de manera predeterminada ```jitMasking``` es falso. El valor puede ser ```true```, ```false```, o un número de umbral, por ejemplo ```5```.
@@ -219,7 +220,7 @@ Inputmask({
 mostrará:
 ![jitMaskingTrue](https://i.imgur.com/uAaJa4z.png)
 
-Pero al ingresar valores en el input se aplicara la mascara al momento de ingresar cada valor, de forma que se verá así:
+y al ingresar valores en el input se aplicara la mascara al momento de ingresar cada valor, de forma que se verá así:
 ![jitMaskingFull](https://i.imgur.com/MoWFNLy.png)
 
 
