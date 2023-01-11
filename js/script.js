@@ -1,7 +1,12 @@
+
+const MAX_VALUE_CO = 3;
+const MAX_VALUE_OTHERS = 6;
+const PAIS = 'CO';
+
 $(document).ready(function(){
 
   Inputmask({
-    mask:"999",
+    alias: 'currency',
   }).mask("#basicoPruebas");
 
   Inputmask({
@@ -60,6 +65,35 @@ $(document).ready(function(){
     digits: 2,
     autoGroup: true
   }).mask("#dinero");
+
+  Inputmask({
+    mask: function () { 
+      let mascara = '';
+      let paisActual = $('#mascaraFuncion').attr('data');
+      console.log(paisActual);
+      if(PAIS === paisActual){
+        mascara = `AAA-9{${MAX_VALUE_CO}}`;
+      } else {
+        mascara = `AAA-9{${MAX_VALUE_OTHERS}}`;
+      }
+      return [mascara]; 
+    }
+  }).mask("#mascaraFuncion");
+
+  Inputmask({
+    mask: "999-999-9999",
+    jitMasking: false,
+  }).mask("#mascaraJITFalse");
+
+  Inputmask({
+    mask: "999-999-9999",
+    jitMasking: true,
+  }).mask("#mascaraJITTrue");
+
+  Inputmask({
+    mask: "999-999-9999",
+    jitMasking: 5,
+  }).mask("#mascaraJITUmbral");
 
 
 

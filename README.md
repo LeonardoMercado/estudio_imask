@@ -146,7 +146,7 @@ Inputmask({
   }).mask("#alternadorEjemplo");
 ~~~
 
-Se debe ingresar dos numeros seguidos de un punto y otro numero, **o** ingresar una X. La definicion dentro de la declaracion, valida que si se ingresa una x o X se tome como entrada y se convierte a MAYUSCULAS.
+Se debe ingresar dos numeros seguidos de un punto y otro numero, **O** ingresar una X. La definicion dentro de la declaracion, valida que si se ingresa una x o X se tome como entrada y se convierte a MAYUSCULAS.
 
 Otra forma de declara esta mascara es:
 ~~~
@@ -161,7 +161,101 @@ Inputmask({
   }).mask("#basicoPruebas");
 ~~~
 
+#### Máscaras de preprocesamiento:
 
+Puede definir la máscara como una función que le permite preprocesar la máscara resultante. Ejemplo de clasificación de varias máscaras o recuperación de definiciones de máscaras dinámicamente a través de ajax. El preprocesamiento de la función debe devolver una definición de máscara válida. Es decir, podemos ejecutar una funcion dentro de la definicion del objeto tipo mascara el cual debe devolver una mascara valida para el input.
+
+Ejemplo:
+~~~
+const MAX_VALUE_CO = 3;
+const MAX_VALUE_OTHERS = 6;
+const PAIS = 'CO';
+Inputmask({
+  mask: function () { 
+    let mascara = '';
+    let paisActual = $('#mascaraFuncion').attr('data');
+    console.log(paisActual);
+    if(PAIS === paisActual){
+      mascara = `AAA-9{${MAX_VALUE_CO}}`;
+    } else {
+      mascara = `AAA-9{${MAX_VALUE_OTHERS}}`;
+    }
+    return [mascara]; 
+  }
+}).mask("#mascaraFuncion");
+~~~
+
+Si la data del input ```mascaraFuncion``` es CO se mostrará:
+![mascaraCO](https://i.imgur.com/0tdg3jP.png)
+
+Caso contrario mostrará:
+![mascaraCO](https://i.imgur.com/K692HTb.png)
+
+#### Enmascaramiento JIT:
+
+Enmascaramiento justo a tiempo (JIT => Just In Time). Con la opción ```jitMasking```, puede habilitar el enmascaramiento jit. La máscara solo será visible para los caracteres ingresados por el usuario. de manera predeterminada ```jitMasking``` es falso. El valor puede ser ```true```, ```false```, o un número de umbral, por ejemplo ```5```.
+
+Es decir, el atributo ```jitMasking``` controla si la mascara se muestra por defecto o no, tambien se puede mostrar hasta una cantidad de caracteres definidos por el umbral pasado como parámetro.
+
+Por ejemplo:
+~~~
+Inputmask({
+  mask: "999-999-9999",
+  jitMasking: false,
+}).mask("#mascaraJIT");
+~~~
+
+mostrará:
+![jitMaskingFalse](https://i.imgur.com/6VYbsv3.png)
+
+Pero si activamos el actributo jitMasking:
+~~~
+Inputmask({
+  mask: "999-999-9999",
+  jitMasking: true,
+}).mask("#mascaraJIT");
+~~~
+
+mostrará:
+![jitMaskingTrue](https://i.imgur.com/uAaJa4z.png)
+
+Pero al ingresar valores en el input se aplicara la mascara al momento de ingresar cada valor, de forma que se verá así:
+![jitMaskingFull](https://i.imgur.com/MoWFNLy.png)
+
+
+Tambien podemos definir un umbral para que la mascara se renderize, y despues de dicho umbras sera just in time:
+
+Por ejemplo:
+
+~~~
+Inputmask({
+  mask: "999-999-9999",
+  jitMasking: 5,
+}).mask("#mascaraJITUmbral");
+~~~
+
+mostrará:
+![jitmaskingUmbral](https://i.imgur.com/3ZpEecX.png)
+
+
+
+
+
+---
+Revisar alias de la libreria:
+| Alias        | Descripción                                                                                                                                                                                                                                                                                            |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| decimal      | Permite ingresar números decimales con un punto decimal.                                                                                                                                                                                                                                            |
+| integer      | Permite ingresar solo números enteros.                                                                                                                                                                                                                                                              |
+| alphanumeric | Permite ingresar caracteres alfanuméricos (letras y números).                                                                                                                                                                                                                                   |
+| currency     | Permite ingresar números con formato moneda, con un símbolo de moneda opcional y separador de miles opcional.                                                                                                                                                                                  |
+| email        | Valida que el input sea un email válido                                                                                                                                                                                                                                                         |
+| ip           | Permite ingresar una dirección IP v4.                                                                                                                                                                                                                                                             |
+| mac          | Permite ingresar una dirección MAC.                                                                                                                                                                                                                                                              |
+| url          | Permite ingresar una url válida.                                                                                                                                                                                                                                                                 |
+| date         | Permite ingresar una fecha con un formato específico.                                                                                                                                                                                                                                             |
+| phone        | Permite ingresar un número de teléfono con un formato específico.                                                                                                                                                                                                                             |
+| time         | Permite ingresar una hora con un formato específico.                                                                                                                                      
 
 
 
