@@ -6,7 +6,7 @@ const PAIS = 'CO';
 $(document).ready(function(){
 
   Inputmask({
-    alias: 'email',
+    alias: 'decimal',
   }).mask("#basicoPruebas");
 
   Inputmask({

@@ -161,7 +161,7 @@ Inputmask({
   }).mask("#basicoPruebas");
 ~~~
 
-#### Máscaras de preprocesamiento:
+#### Máscaras de Preprocesamiento:
 
 Puede definir la máscara como una función que le permite preprocesar la máscara resultante. Ejemplo de clasificación de varias máscaras o recuperación de definiciones de máscaras dinámicamente a través de ajax. El preprocesamiento de la función debe devolver una definición de máscara válida. Es decir, podemos ejecutar una funcion dentro de la definicion del objeto tipo mascara el cual debe devolver una mascara valida para el input.
 
@@ -174,7 +174,6 @@ Inputmask({
   mask: function () { 
     let mascara = '';
     let paisActual = $('#mascaraFuncion').attr('data');
-    console.log(paisActual);
     if(PAIS === paisActual){
       mascara = `AAA-9{${MAX_VALUE_CO}}`;
     } else {
