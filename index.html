@@ -316,6 +316,64 @@
     </div>
   </div>
 
+  <hr>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <label for="opcionesPlaceHolder" class="form-label">Ejemplo Mascara con opciones PlaceHolder: </label>
+        <!-- Ejemplo Basico para Pruebas -->
+        <div class="input-group">
+          <input type="text" class="form-control" id="opcionesPlaceHolder" autocomplete="off">
+      </div>
+      <div class="mt-3">
+        <p>Codigo js: </p>
+        <code>
+          <pre class="fs-6">
+            Inputmask({
+              mask: '99/99/9999',
+              placeholder: "dd/mm/yyyy"
+            }).mask("#opcionesPlaceHolder");
+          </pre>
+        </code>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <label for="opcionesOnComplite" class="form-label">Ejemplo Mascara con opciones onComplete: </label>
+        <!-- Ejemplo Basico para Pruebas -->
+        <div class="input-group">
+          <input type="text" class="form-control" id="opcionesOnComplite" autocomplete="off">
+      </div>
+      <div>
+        <span class="d-none" id="errorOnComplete">asd</span>
+      </div>
+      <div class="mt-3">
+        <p>Codigo js: </p>
+        <code>
+          <pre class="fs-6">
+            Inputmask({
+              mask: 'a{3,9}',
+              oncomplete: function(){ 
+                mostradorError($('#errorOnComplete'),true); 
+              },
+              onincomplete: function(){
+                mostradorError($('#errorOnComplete'),false); 
+              }
+            }).mask("#opcionesOnComplite");
+          </pre>
+        </code>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+
   
 
 

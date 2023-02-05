@@ -237,8 +237,57 @@ Inputmask({
 mostrará:
 ![jitmaskingUmbral](https://i.imgur.com/3ZpEecX.png)
 
+#### Opciones:
 
+##### PlaceHolder
+Cambie el marcador de posición de la máscara. Por defecto: "_"
 
+En lugar de "_", puede cambiar la máscara de caracteres vacíos como desee, simplemente agregando la opción de marcador de posición.
+Por ejemplo, el marcador de posición: " " cambiará el autorrelleno predeterminado con valores vacíos
+
+Ejemplo:
+~~~
+Inputmask({
+  mask: '99/99/9999',
+  placeholder: "dd/mm/yyyy"
+}).mask("#opcionesPlaceHolder");
+~~~
+
+Mostrará:
+![mascaraPlaceHolder](https://i.imgur.com/qH9uxDa.png)
+
+##### oncomplite y onincomplete:
+La opción oncomplite se ejecuta cuando la mascara esta completa, y onincomplete cuando la mascara no esta completa.
+
+Ejemplo:
+~~~
+Inputmask({
+  mask: 'a{3,9}',
+  oncomplete: function(){ 
+    mostradorError($('#errorOnComplete'),true); 
+  },
+  onincomplete: function(){
+    mostradorError($('#errorOnComplete'),false); 
+  }
+}).mask("#opcionesOnComplite");
+
+function mostradorError(select,esValido){
+  select.removeClass('d-none');
+  select.text(`El campo ${(esValido)?'':'NO'} es valido`);
+  if(esValido){
+    select.addClass('text-success');    
+    select.removeClass('text-danger');    
+  } else {
+    select.removeClass('text-success');    
+    select.addClass('text-danger');  
+  }
+}
+~~~
+
+Cuando la mascara este COMPLETA mostrará:
+![mascaraCompleta](https://i.imgur.com/yAf7mGY.png)
+Cuando la mascara este INCOMPLETA mostrará:
+![mascaraCompleta](https://i.imgur.com/XWt5ixK.png)
 
 
 ---

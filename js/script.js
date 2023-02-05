@@ -6,8 +6,11 @@ const PAIS = 'CO';
 $(document).ready(function(){
 
   Inputmask({
-    alias: 'decimal',
+    mask: 'a{3}-9{3}',
+    oncomplete: function(){ alert('inputmask complete'); }
   }).mask("#basicoPruebas");
+
+  
 
   Inputmask({
     mask: '+(57) 9{3} 9{3} 9{4}',
@@ -94,7 +97,32 @@ $(document).ready(function(){
     jitMasking: 5,
   }).mask("#mascaraJITUmbral");
 
+  Inputmask({
+    mask: '99/99/9999',
+    placeholder: "dd/mm/yyyy"
+  }).mask("#opcionesPlaceHolder");
 
+  Inputmask({
+    mask: 'a{3,9}',
+    oncomplete: function(){ 
+      mostradorError($('#errorOnComplete'),true); 
+    },
+    onincomplete: function(){
+      mostradorError($('#errorOnComplete'),false); 
+    }
+  }).mask("#opcionesOnComplite");
 
 
 });
+
+function mostradorError(select,esValido){
+  select.removeClass('d-none');
+  select.text(`El campo ${(esValido)?'':'NO'} es valido`);
+  if(esValido){
+    select.addClass('text-success');    
+    select.removeClass('text-danger');    
+  } else {
+    select.removeClass('text-success');    
+    select.addClass('text-danger');  
+  }
+}
