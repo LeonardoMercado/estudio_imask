@@ -351,21 +351,21 @@ Con esta máscara, se puede garantizar que los números decimales se ingresen en
 Ejemplo:
 ~~~
 Inputmask({
-    alias: "decimal",
-    prefix: '$ ',
-    radixPoint: ",",
-    autoGroup: true,
-    groupSeparator: "\.",
-    digits: 2,
-    digitsOptional: false,
-    placeholder: "0",
-    oncomplete: function(){
-      console.log("La máscara se ha completado");
-    },
-    onincomplete: function(){
-      console.log("La máscara no se ha completado");
-    }
-  }).mask("#aliasDecimal");
+  alias: "decimal",
+  prefix: '$ ',
+  radixPoint: ",",
+  autoGroup: true,
+  groupSeparator: "\.",
+  digits: 2,
+  digitsOptional: false,
+  placeholder: "0",
+  oncomplete: function(){
+    console.log("La máscara se ha completado");
+  },
+  onincomplete: function(){
+    console.log("La máscara no se ha completado");
+  }
+}).mask("#aliasDecimal");
 ~~~
 
 Mostrará:
@@ -375,9 +375,123 @@ Mostrará:
 ![decimal4](https://i.imgur.com/R57pWbe.png)
 ![decimal4](https://i.imgur.com/zvUKYw1.png)
 
+##### integer:
 
----
-Revisar alias de la libreria:
+La máscara se aplica a un elemento de entrada y limita la entrada del usuario a solo dígitos numéricos. Es útil para asegurarse de que los datos de entrada sean números enteros válidos. Por ejemplo, se puede utilizar para aplicar una máscara de entrada a un elemento de formulario que requiera una edad, una identificación o un número de teléfono.
+
+Ejemplo:
+~~~
+Inputmask({
+  alias: "integer",
+}).mask("#aliasInteger");
+~~~
+
+![integer1](https://i.imgur.com/9w5sPxq.png)
+![integer2](https://i.imgur.com/lCj5IJ5.png)
+
+
+##### currency:
+
+La máscara se aplica a un elemento de entrada y limita la entrada del usuario a un formato de moneda específico, que se puede personalizar mediante opciones adicionales. Es útil para asegurarse de que los datos de entrada sean valores de moneda válidos.
+
+Ejemplo moneda Colombiana:
+~~~
+Inputmask({
+  alias: "currency",
+  radixPoint: ",",
+  prefix: "COP$ ",
+  autoGroup: true,
+  groupSeparator: "\.",
+  digits: 2,
+  digitsOptional: false,
+  placeholder: "0"
+}).mask("#aliasCurrencyCO");
+~~~
+
+Mostrará:
+![currencyCO1](https://i.imgur.com/UW4GDUX.png)
+![currencyCO2](https://i.imgur.com/A4nTnii.png)
+
+Ejemplo moneda Mexicana:
+~~~
+Inputmask({
+  alias: "currency",
+  radixPoint: ",",
+  prefix: "MXN$ ",
+  autoGroup: true,
+  groupSeparator: "\.",
+  digits: 2,
+  digitsOptional: false,
+  placeholder: "0"
+}).mask("#aliasCurrencyMX");
+~~~
+
+Mostrará:
+![currencyMX1](https://i.imgur.com/LpiN1D2.png)
+![currencyMX2](https://i.imgur.com/o0wp1Y6.png)
+
+##### email:
+Se utiliza para aplicar una máscara de entrada para validar los valores de correo electrónico. La máscara se aplica a un elemento de entrada y limita la entrada del usuario a un formato de correo electrónico válido, que es [nombre de usuario] @ [servidor de correo].
+
+Ejemplo:
+~~~
+Inputmask({
+  alias: "email",
+}).mask("#aliasEmail");
+~~~
+
+Mostrará
+![email1](https://i.imgur.com/Xvjbh9L.png)
+![email2](https://i.imgur.com/Ppjf2T7.png)
+
+##### ip:
+Se utiliza para aplicar una máscara de entrada para validar los valores de direcciones IP. La máscara se aplica a un elemento de entrada y limita la entrada del usuario a un formato de dirección IP válido, que consiste en cuatro números de 8 bits separados por puntos.
+
+Esta máscara se asegura de que el usuario solo pueda ingresar una dirección IP válida en el formato [número]. [número]. [número]. [número].
+
+
+Ejemplo:
+~~~
+Inputmask({
+  alias: "ip",
+}).mask("#aliasIp");
+~~~
+
+![ip1](https://i.imgur.com/UFYIvd2.png)
+![ip2](https://i.imgur.com/WhPXTKR.png)
+
+##### mac:
+Se utiliza para aplicar una máscara de entrada para validar los valores de direcciones MAC. La máscara se aplica a un elemento de entrada y limita la entrada del usuario a un formato de dirección MAC válido, que consiste en seis números o letras pares separados por dos puntos.
+
+Esta máscara se asegura de que el usuario solo pueda ingresar una dirección MAC válida en el formato [número o letra][número o letra]:[número o letra][número o letra]:[número o letra][número o letra]:[número o letra][número o letra]:[número o letra][número o letra]:[número o letra][número o letra].
+
+Ejemplo:
+~~~
+Inputmask({
+  alias: "mac",
+}).mask("#aliasMac");
+~~~
+
+![mac1](https://i.imgur.com/IPlkJB9.png)
+![mac2](https://i.imgur.com/gC1MY6F.png)
+
+##### url:
+Se utiliza para aplicar una máscara de entrada para validar las direcciones URL. La máscara se aplica a un elemento de entrada y limita la entrada del usuario a un formato de dirección URL válido, que incluye un esquema (por ejemplo, "http://" o "https://") seguido de un nombre de dominio o dirección IP y una ruta opcional.
+
+Esta máscara se asegura de que el usuario solo pueda ingresar una dirección URL válida en el formato ```[esquema]://[nombre de dominio o dirección IP]/[ruta opcional]```.
+
+Ejemplo:
+~~~
+Inputmask({
+  alias: "url",
+}).mask("#aliasUrl");
+~~~
+
+![url1](https://i.imgur.com/O1JxuTi.png)
+![url2](https://i.imgur.com/6tutWRz.png)
+![url3](https://i.imgur.com/pnUXmgV.png)
+
+Resumen alias de la libreria:
 | Alias        | Descripción                                                                                                                                                                                                                                                                                            |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | decimal      | Permite ingresar números decimales con un punto decimal.                                                                                                                                                                                                                                            |
@@ -388,9 +502,7 @@ Revisar alias de la libreria:
 | ip           | Permite ingresar una dirección IP v4.                                                                                                                                                                                                                                                             |
 | mac          | Permite ingresar una dirección MAC.                                                                                                                                                                                                                                                              |
 | url          | Permite ingresar una url válida.                                                                                                                                                                                                                                                                 |
-| date         | Permite ingresar una fecha con un formato específico.                                                                                                                                                                                                                                             |
-| phone        | Permite ingresar un número de teléfono con un formato específico.                                                                                                                                                                                                                             |
-| time         | Permite ingresar una hora con un formato específico.                                                                                                                                      
+| datetime         | Permite ingresar una fecha con un formato específico.                                                                                                                                        
 
 
 

@@ -6,7 +6,7 @@ const PAIS = 'CO';
 $(document).ready(function(){
 
   Inputmask({
-    alias: "integer"
+    alias: "currency"
   }).mask("#basicoPruebas");
 
   
@@ -141,6 +141,50 @@ $(document).ready(function(){
       console.log("La máscara no se ha completado");
     }
   }).mask("#aliasDecimal");
+
+  Inputmask({
+    alias: "integer",
+  }).mask("#aliasInteger");
+
+  Inputmask({
+    alias: "currency",
+    radixPoint: ",",
+    prefix: "COP$ ",
+    autoGroup: true,
+    groupSeparator: "\.",
+    digits: 2,
+    digitsOptional: false,
+    placeholder: "0"
+  }).mask("#aliasCurrencyCO");
+
+  Inputmask({
+    alias: "currency",
+    radixPoint: ",",
+    prefix: "MXN$ ",
+    autoGroup: true,
+    groupSeparator: "\.",
+    digits: 2,
+    digitsOptional: false,
+    placeholder: "0"
+  }).mask("#aliasCurrencyMX");
+
+  Inputmask({
+    alias: "email",
+  }).mask("#aliasEmail");
+
+  Inputmask({
+    alias: "ip",
+  }).mask("#aliasIp");
+
+  Inputmask({
+    alias: "mac",
+  }).mask("#aliasMac");
+
+  Inputmask({
+    alias: "url",
+  }).mask("#aliasUrl");
+
+
 
 
 });
