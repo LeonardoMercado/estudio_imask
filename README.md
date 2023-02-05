@@ -257,7 +257,7 @@ Mostrará:
 ![mascaraPlaceHolder](https://i.imgur.com/qH9uxDa.png)
 
 ##### oncomplite y onincomplete:
-La opción oncomplite se ejecuta cuando la mascara esta completa, y onincomplete cuando la mascara no esta completa.
+La opción **oncomplite** se ejecuta cuando la mascara esta completa, y **onincomplete** cuando la mascara no esta completa.
 
 Ejemplo:
 ~~~
@@ -288,6 +288,92 @@ Cuando la mascara este COMPLETA mostrará:
 ![mascaraCompleta](https://i.imgur.com/yAf7mGY.png)
 Cuando la mascara este INCOMPLETA mostrará:
 ![mascaraCompleta](https://i.imgur.com/XWt5ixK.png)
+
+Estos dos metodos son necesarios para realizar la validacion de los inputs antes de hacer el submit del formulario.
+
+##### oncleared:
+La opcion **oncleared** se ejecutará cuando el usuario borre el contenido del input.
+
+Ejemplo:
+~~~
+Inputmask({
+    mask: 'a{3}-9{3}',
+    oncleared: function(){ alert('Debe ingresar un valor para este input'); }
+  }).mask("#opcionesCleared");
+~~~
+
+Nota: La funcion definida en la opción se ejecuta antes de borrar el último carácter del input.
+![mascaraCleared](https://i.imgur.com/iRzn9hP.png)
+
+Esta opcion puede ser util para:
+1. Mostrar un mensaje de error: Puedes usar "oncleared" para mostrar un mensaje de error cuando un usuario borra el contenido de un campo de entrada que requiere un valor.
+2. Cambiar el estado de un elemento: Si deseas cambiar el estado de un elemento cuando se borra el contenido de un campo de entrada.
+
+Recuerde que también puede usar la opción **onincomplete** para generar el comportamiento deseado, tanto si se borra todo el contenido como si no se completa la restricción del input.
+
+##### clearIncomplete:
+Esta opción borra todo el contenido del input si no se completa la mascara.
+
+Ejemplo:
+~~~
+Inputmask({
+  mask: '+(57) 9{3} 9{3} 9{4}',
+  "clearIncomplete": true
+}).mask("#opcionesClearIncomplete");
+~~~
+
+Nota: Esta opción debe evitarse ya que puede ser molesto para el usuario escribir todo el dato de nuevo cada vez que no se complete el input. Es mejor avisarle y permitir modificaciones.
+
+#### Alias:
+Con un alias, puede definir una definición de máscara compleja y llamarla utilizando un nombre de alias. Esto es principalmente para simplificar el uso de sus máscaras. Algunos alias que se encuentran en las extensiones son correo electrónico, moneda, decimal, entero, fecha, fecha y hora, dd/mm/yyyy, etc.
+
+Primero, debe crear una definición de alias. La definición de alias puede contener opciones para la máscara, definiciones personalizadas, la máscara a usar, etc.
+
+Cuando pasa un alias, primero se resuelve el alias y luego se aplican las otras opciones. Entonces puede llamar a un alias y pasar otra máscara para que se aplique sobre el alias. Esto también significa que puede escribir alias que "hereden" de otro alias.
+
+##### datetime:
+Permite generar una mascara tipo fecha y hora muy facilmente, con esta máscara, se puede garantizar que los datos de fecha y hora se ingresen en el formato correcto, lo que facilita su posterior procesamiento y análisis.
+
+Ejemplo:
+~~~
+Inputmask({
+  alias: "datetime",
+}).mask("#aliasDateTime");
+~~~
+
+Mostrará:
+![datetime1](https://i.imgur.com/7zUWOvH.png)
+![datetime2](https://i.imgur.com/BSttmu0.png)
+
+##### decimal:
+Con esta máscara, se puede garantizar que los números decimales se ingresen en el formato correcto, lo que facilita su posterior procesamiento y análisis. Además, también se pueden establecer opciones como la cantidad de dígitos decimales permitidos y el separador de decimales.
+
+Ejemplo:
+~~~
+Inputmask({
+    alias: "decimal",
+    prefix: '$ ',
+    radixPoint: ",",
+    autoGroup: true,
+    groupSeparator: "\.",
+    digits: 2,
+    digitsOptional: false,
+    placeholder: "0",
+    oncomplete: function(){
+      console.log("La máscara se ha completado");
+    },
+    onincomplete: function(){
+      console.log("La máscara no se ha completado");
+    }
+  }).mask("#aliasDecimal");
+~~~
+
+Mostrará:
+![decimal1](https://i.imgur.com/u74GtOX.png)
+![decimal2](https://i.imgur.com/iqGOzu9.png)
+![decimal3](https://i.imgur.com/jiTYkH7.png)
+![decimal4](https://i.imgur.com/R57pWbe.png)
+![decimal4](https://i.imgur.com/zvUKYw1.png)
 
 
 ---

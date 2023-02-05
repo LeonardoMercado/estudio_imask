@@ -6,8 +6,7 @@ const PAIS = 'CO';
 $(document).ready(function(){
 
   Inputmask({
-    mask: 'a{3}-9{3}',
-    oncomplete: function(){ alert('inputmask complete'); }
+    alias: "integer"
   }).mask("#basicoPruebas");
 
   
@@ -111,6 +110,37 @@ $(document).ready(function(){
       mostradorError($('#errorOnComplete'),false); 
     }
   }).mask("#opcionesOnComplite");
+
+  Inputmask({
+    mask: 'a{3}-9{3}',
+    oncleared: function(){ alert('Debe ingresar un valor para este input'); }
+  }).mask("#opcionesCleared");
+
+  Inputmask({
+    mask: '+(57) 9{3} 9{3} 9{4}',
+    "clearIncomplete": true
+  }).mask("#opcionesClearIncomplete");
+
+  Inputmask({
+    alias: "datetime",
+  }).mask("#aliasDateTime");
+
+  Inputmask({
+    alias: "decimal",
+    prefix: '$ ',
+    radixPoint: ",",
+    autoGroup: true,
+    groupSeparator: "\.",
+    digits: 2,
+    digitsOptional: false,
+    placeholder: "0",
+    oncomplete: function(){
+      console.log("La máscara se ha completado");
+    },
+    onincomplete: function(){
+      console.log("La máscara no se ha completado");
+    }
+  }).mask("#aliasDecimal");
 
 
 });
